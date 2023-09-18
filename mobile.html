@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capture Photos</title>
+</head>
+<body>
+    <h1>Mobile Camera Capture</h1>
+    <video id="camera" width="100%" height="auto" autoplay></video>
+    <canvas id="photoCanvas" style="display: none;"></canvas>
+    <img id="capturedPhoto" src="#" alt="Captured Photo">
+    <button id="captureButton">Capture</button>
+    
+    <script>
+        const camera = document.getElementById('camera');
+        const photoCanvas = document.getElementById('photoCanvas');
+        const capturedPhoto = document.getElementById('capturedPhoto');
+        const captureButton = document.getElementById('captureButton');
+
+        let currentStream;
+        const constraintsRearCamera = { video: { facingMode: 'environment' } };
+        const constraintsFrontCamera = { video: { facingMode: 'user' } };
+
+        async function startCamera(constraints) {
+            try {
+                currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+                camera.srcObject = currentStream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        }
+
+        startCamera(constraintsRearCamera); // Start with the rear camera by default
+
+        captureButton.addEventListener('click', () => {
+            if (currentStream) {
+                const context = photoCanvas.getContext('2d');
+                photoCanvas.width = camera.videoWidth;
+                photoCanvas.height = camera.videoHeight;
+                context.drawImage(camera, 0, 0, photoCanvas.width, photoCanvas.height);
+
+                capturedPhoto.src = photoCanvas.toDataURL('image/png');
+                capturedPhoto.style.display = 'block';
+            }
+        });
+
+        // Toggle between rear and front cameras
+        function toggleCamera() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => {
+                    track.stop();
+                });
+
+                if (camera.srcObject === constraintsRearCamera) {
+                    startCamera(constraintsFrontCamera);
+                } else {
+                    startCamera(constraintsRearCamera);
+                }
+            }
+        }
+
+        camera.addEventListener('click', toggleCamera);
+    </script>
+</body>
+</html>

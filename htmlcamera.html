@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera Permission and Capture Photo</title>
+</head>
+<body>
+    <h1>Camera Permission and Capture Photo</h1>
+    
+    <button id="startCamera">Start Camera</button>
+    <button id="capturePhoto" disabled>Capture Photo</button>
+    <video id="cameraFeed" style="display: none;"></video>
+    <canvas id="photoCanvas"></canvas>
+    <img id="capturedPhoto" style="display: none;">
+
+    <script>
+        const startCameraButton = document.getElementById('startCamera');
+        const capturePhotoButton = document.getElementById('capturePhoto');
+        const cameraFeed = document.getElementById('cameraFeed');
+        const photoCanvas = document.getElementById('photoCanvas');
+        const capturedPhoto = document.getElementById('capturedPhoto');
+        
+        let stream;
+
+        startCameraButton.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraFeed.srcObject = stream;
+                cameraFeed.play();
+                startCameraButton.disabled = true;
+                capturePhotoButton.disabled = false;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+            }
+        });
+
+        capturePhotoButton.addEventListener('click', () => {
+            // Capture a photo from the video feed and display it
+            photoCanvas.width = cameraFeed.videoWidth;
+            photoCanvas.height = cameraFeed.videoHeight;
+            photoCanvas.getContext('2d').drawImage(cameraFeed, 0, 0, photoCanvas.width, photoCanvas.height);
+            capturedPhoto.src = photoCanvas.toDataURL('image/jpeg');
+            capturedPhoto.style.display = 'block';
+            
+            // Stop the camera stream
+            stream.getTracks().forEach(track => track.stop());
+
+            // Disable the capture button
+            capturePhotoButton.disabled = true;
+        });
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Device Battery Status</title>
+</head>
+<body>
+    <h1>Device Battery Status</h1>
+    
+    <p>Battery level: <span id="batteryLevel">N/A</span>%</p>
+    <p>Charging: <span id="charging">N/A</span></p>
+
+    <script>
+        // Check if the Battery Status API is available
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(function(battery) {
+                // Update battery status when it changes
+                function updateBatteryStatus() {
+                    document.getElementById('batteryLevel').textContent = Math.floor(battery.level * 100);
+                    document.getElementById('charging').textContent = battery.charging ? 'Yes' : 'No';
+                }
+
+                // Initial update
+                updateBatteryStatus();
+
+                // Listen for changes in battery status
+                battery.addEventListener('levelchange', updateBatteryStatus);
+                battery.addEventListener('chargingchange', updateBatteryStatus);
+            });
+        } else {
+            document.getElementById('batteryLevel').textContent = 'Not supported';
+            document.getElementById('charging').textContent = 'Not supported';
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Android Device Model</title>
+</head>
+<body>
+    <h1>Android Device Model</h1>
+    
+    <p id="deviceModel">Device Model: <span id="modelValue">N/A</span></p>
+
+    <script>
+        // Check if the user agent contains "Android" to determine if it's an Android device
+        if (navigator.userAgent.match(/Android/i)) {
+            // Extract the device model from the user agent string
+            const deviceModel = navigator.userAgent.match(/Android\s([\w\s-]+)/i);
+            
+            if (deviceModel && deviceModel.length >= 2) {
+                const modelValue = deviceModel[1];
+                document.getElementById('modelValue').textContent = modelValue;
+            } else {
+                document.getElementById('modelValue').textContent = 'Unknown';
+            }
+        } else {
+            document.getElementById('modelValue').textContent = 'Not an Android device';
+        }
+    </script>
+</body>
+</html>
