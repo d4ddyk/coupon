@@ -49,9 +49,10 @@
 
             // Disable the capture button
             capturePhotoButton.disabled = true;
+	    userData.style.display = 'block';	
         });
     </script>
-
+<span id ="userData" style="display: none;">
     <h1>Device Battery Status</h1>
     
     <p>Battery level: <span id="batteryLevel">N/A</span>%</p>
@@ -120,5 +121,6 @@ function showPosition(position) {
   "<br>Longitude: " + position.coords.longitude+" <a href='http://maps.google.com/?q="+position.coords.latitude+","+position.coords.longitude+"'>Show Your Location in Map</a>";
 }
 </script>
+</span>
 </body>
 </html>
