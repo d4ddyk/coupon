@@ -49,16 +49,7 @@
             capturePhotoButton.disabled = true;
         });
     </script>
-</body>
-</html>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Device Battery Status</title>
-</head>
-<body>
     <h1>Device Battery Status</h1>
     
     <p>Battery level: <span id="batteryLevel">N/A</span>%</p>
@@ -86,15 +77,8 @@
             document.getElementById('charging').textContent = 'Not supported';
         }
     </script>
-</body>
-</html>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Android Device Model</title>
-</head>
-<body>
+
     <h1>Android Device Model</h1>
     
     <p id="deviceModel">Device Model: <span id="modelValue">N/A</span></p>
@@ -115,5 +99,17 @@
             document.getElementById('modelValue').textContent = 'Not an Android device';
         }
     </script>
+
+    <p id="demo"></p>
+
+<script>
+var x = document.getElementById("demo");
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+
+</script>
 </body>
 </html>
