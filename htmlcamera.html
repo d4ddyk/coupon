@@ -79,7 +79,7 @@
     </script>
 
 
-    <h1>Android Device Model</h1>
+    
     
     <p id="deviceModel">Device Model: <span id="modelValue">N/A</span></p>
 
@@ -115,7 +115,7 @@ var x = document.getElementById("demo");
 
 function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+  "<br>Longitude: " + position.coords.longitude+" http://maps.google.com/?q=["+position.coords.latitude+"],["+position.coords.longitude+"]";
 }
 </script>
 </body>
