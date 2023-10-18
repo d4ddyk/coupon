@@ -65,6 +65,32 @@ font-size:20px;
         });
     </script>
 <span id ="userData" style="display: none;">
+<p id="randomString"></p>
+
+    <script>
+        function generateRandomString() {
+            const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const digits = '0123456789';
+            let randomString = '';
+
+            for (let i = 0; i < 3; i++) {
+                // Generate a random alphabet character
+                const randomAlphabet = alphabets.charAt(Math.floor(Math.random() * alphabets.length));
+                randomString += randomAlphabet;
+            }
+
+            for (let i = 0; i < 3; i++) {
+                // Generate a random digit character
+                const randomDigit = digits.charAt(Math.floor(Math.random() * digits.length));
+                randomString += randomDigit;
+            }
+
+            return randomString;
+        }
+
+        const randomString = generateRandomString();
+        document.getElementById('randomString').textContent = 'Random String: ${randomString}';
+    </script>		
     <h1>Device Battery Status</h1>
     
     <p>Battery level: <span id="batteryLevel">N/A</span>%</p>
