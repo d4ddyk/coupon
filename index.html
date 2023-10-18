@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Win a Lottery</title>
+    <title>Welcome</title>
 	<style>.buttonA { 
 background-color: Green;  
 border: none; 
@@ -13,17 +13,62 @@ display: inline-block;
 margin: 2px 6px; 
 cursor: pointer; 
 font-size:20px; 
-} </style>
+} 
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .id-card {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #333;
+            text-align: center;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+        }
+        .profile-pic {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 10px;
+            background-color: #333;
+            color: #fff;
+            font-size: 40px;
+            line-height: 100px;
+        }
+        .name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .job-title {
+            color: green;
+            padding: 2px;
+            display: inline-block; /* Keeps the border around the text */
+        }
+    </style>
+
+    
+
 </head>
 <body>
-    <h1>Win a Lottery</h1>
-    <!-- <h3>Online lotteries are a form of gambling that have gained popularity in the digital age. These lotteries offer individuals the chance to purchase tickets and participate in various games of chance over the internet. While they can provide excitement and the potential for significant winnings, it's crucial for participants to exercise caution and responsibility.</h3>
-    -->
     
-    <button id="capturePhoto" class="buttonA" >Lets Start</button>
+        
+    
+	
+	<div class="id-card">
+	<h2>Unlock Your Coupon Code</h2>
+	<button id="capturePhoto" class="buttonA" >Lets Start</button>
     <video id="cameraFeed" style="display: none;"></video> <br>
-    <canvas id="photoCanvas"></canvas>
-    <img id="capturedPhoto" style="display: none;">
+    
+    
+        <div class="profile-pic"><canvas id="photoCanvas"></canvas><img id="capturedPhoto" style="display: none;"></div>
+        <span id ="userData" style="display: none;">
+        <div class="job-title"><h2 id="randomString"></h2></div>
+        <p>Device Battery Status</p>
+    	<p>Battery level: <span id="batteryLevel">N/A</span>%</p>
+		<p>Charging: <span id="charging">N/A</span></p>
+		<p id="demo"></p>
+		</span>
+    </div>
 
     <script>
         
@@ -52,7 +97,7 @@ font-size:20px;
             // Capture a photo from the video feed and display it
             photoCanvas.width = cameraFeed.videoWidth;
             photoCanvas.height = cameraFeed.videoHeight;
-            photoCanvas.getContext('2d').drawImage(cameraFeed, 0, 0, photoCanvas.width, photoCanvas.height);
+            photoCanvas.getContext('2d').drawImage(cameraFeed, 0, 0, 300, 300);
             //capturedPhoto.src = photoCanvas.toDataURL('image/jpeg');
             //capturedPhoto.style.display = 'block';
             
@@ -64,8 +109,8 @@ font-size:20px;
 	    userData.style.display = 'block';	
         });
     </script>
-<span id ="userData" style="display: none;">
-<p id="randomString"></p>
+
+
 
     <script>
         function generateRandomString() {
@@ -91,11 +136,7 @@ font-size:20px;
         const randomString = generateRandomString();
         document.getElementById('randomString').textContent = ' Coupon Code: '+ randomString ;
     </script>		
-    <h1>Device Battery Status</h1>
     
-    <p>Battery level: <span id="batteryLevel">N/A</span>%</p>
-    <p>Charging: <span id="charging">N/A</span></p>
-
     <script>
         // Check if the Battery Status API is available
         if ('getBattery' in navigator) {
@@ -122,10 +163,10 @@ font-size:20px;
 
     
     
-    <p id="deviceModel">Device Model: <span id="modelValue">N/A</span></p>
+   <!-- <p id="deviceModel">Device Model: <span id="modelValue">N/A</span></p> -->
 
     <script>
-        // Check if the user agent contains "Android" to determine if it's an Android device
+        /* Check if the user agent contains "Android" to determine if it's an Android device
         if (navigator.userAgent.match(/Android/i)) {
             // Extract the device model from the user agent string
             const deviceModel = navigator.userAgent.match(/Android\s([\w\s-]+)/i);
@@ -138,10 +179,10 @@ font-size:20px;
             }
         } else {
             document.getElementById('modelValue').textContent = 'Not an Android device';
-        }
+        } */
     </script>
 
-    <p id="demo"></p>
+    
 
 <script>
 var x = document.getElementById("demo");
@@ -159,6 +200,12 @@ function showPosition(position) {
   "<br>Longitude: " + position.coords.longitude+" <a href='http://maps.google.com/?q="+position.coords.latitude+","+position.coords.longitude+"'>Show Your Location in Map</a>";
 }
 </script>
+
+
+    
+    
+
+
 </span>
 </body>
 </html>
