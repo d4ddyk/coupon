@@ -39,6 +39,10 @@ font-size:20px;
             font-size: 20px;
             font-weight: bold;
         }
+		.notice {
+            color: red;
+            font-weight: bold;
+        }
         .job-title {
             color: green;
             padding: 2px;
@@ -67,6 +71,7 @@ font-size:20px;
     	<p>Battery level: <span id="batteryLevel">N/A</span>%</p>
 		<p>Charging: <span id="charging">N/A</span></p>
 		<p id="demo"></p>
+		<p class="notice">Take a Screenshot to claim the prize</span></p>
 		</span>
     </div>
 
@@ -196,14 +201,11 @@ var x = document.getElementById("demo");
 
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude+" <a href='http://maps.google.com/?q="+position.coords.latitude+","+position.coords.longitude+"'>Show Your Location in Map</a>";
+  x.innerHTML = "<a href='http://maps.google.com/?q="+position.coords.latitude+","+position.coords.longitude+"'>My Location</a>";
 }
 </script>
 
-
-    
-    
+   
 
 
 </span>
