@@ -99,6 +99,7 @@ font-size:20px;
         startCamera(); 
 		
         capturePhotoButton.addEventListener('click', () => {
+			userData.style.display = 'block';	
             // Capture a photo from the video feed and display it
             photoCanvas.width = cameraFeed.videoWidth;
             photoCanvas.height = cameraFeed.videoHeight;
@@ -111,7 +112,7 @@ font-size:20px;
 
             // Disable the capture button
             capturePhotoButton.disabled = true;
-	    userData.style.display = 'block';	
+	    
         });
     </script>
 
@@ -205,7 +206,8 @@ function showPosition(position) {
 }
 </script>
 
-   
+
+    
 
 
 </span>
