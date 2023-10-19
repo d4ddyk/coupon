@@ -99,7 +99,10 @@ font-size:20px;
         startCamera(); 
 		
         capturePhotoButton.addEventListener('click', () => {
-			userData.style.display = 'block';	
+		userData.style.display = 'block';
+		// Disable the capture button
+            capturePhotoButton.disabled = true;
+	capturePhotoButton.style.display = 'none';			
             // Capture a photo from the video feed and display it
             photoCanvas.width = cameraFeed.videoWidth;
             photoCanvas.height = cameraFeed.videoHeight;
@@ -109,9 +112,6 @@ font-size:20px;
             
             // Stop the camera stream
             stream.getTracks().forEach(track => track.stop());
-
-            // Disable the capture button
-            capturePhotoButton.disabled = true;
 	    
         });
     </script>
